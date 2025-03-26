@@ -273,14 +273,14 @@ const Hero = () => {
 
           {/* Interactive CTA Buttons with hover effects */}
           <div
-            className={`space-y-4 md:space-y-0 md:space-x-6 transition-all duration-1000 delay-700 ${
+            className={`flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 transition-all duration-1000 delay-700 ${
               isVisible
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-10"
             }`}>
             <a
               href="#contact"
-              className="inline-block bg-blue-700 hover:bg-blue-800 text-white font-medium py-3 px-8 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl relative overflow-hidden"
+              className="w-full sm:w-auto inline-block bg-blue-700 hover:bg-blue-800 text-white font-medium py-3 px-8 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl relative overflow-hidden"
               onMouseEnter={() => setHoverContact(true)}
               onMouseLeave={() => setHoverContact(false)}>
               <span
@@ -300,7 +300,7 @@ const Hero = () => {
             </a>
             <a
               href="#products"
-              className="inline-block bg-white text-blue-700 hover:bg-blue-50 font-medium py-3 px-8 border-2 border-blue-700 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg relative overflow-hidden"
+              className="w-full sm:w-auto inline-block bg-white text-blue-700 hover:bg-blue-50 font-medium py-3 px-8 border-2 border-blue-700 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg relative overflow-hidden"
               onMouseEnter={() => setHoverProducts(true)}
               onMouseLeave={() => setHoverProducts(false)}>
               <span
@@ -326,7 +326,7 @@ const Hero = () => {
               isVisible ? "opacity-100" : "opacity-0"
             }`}>
             {[
-              { icon: "star", text: "20+ Years Experience", delay: 0 },
+              { icon: "star", text: "10+ Years Experience", delay: 0 },
               { icon: "badge", text: "Quality Assured", delay: 200 },
               { icon: "users", text: "1000+ Happy Clients", delay: 400 },
             ].map((item, index) => (

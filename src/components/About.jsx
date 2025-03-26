@@ -10,9 +10,11 @@ const About = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [venturesVisible, setVenturesVisible] = useState(false);
   const [stakeholdersVisible, setStakeholdersVisible] = useState(false);
+  const [personnelVisible, setPersonnelVisible] = useState(false);
   const sectionRef = useRef(null);
   const venturesRef = useRef(null);
   const stakeholdersRef = useRef(null);
+  const personnelRef = useRef(null);
 
   useEffect(() => {
     const observeSection = (ref, setVisibilityFn) => {
@@ -39,12 +41,15 @@ const About = () => {
       stakeholdersRef,
       setStakeholdersVisible
     );
+    const personnelObserver = observeSection(personnelRef, setPersonnelVisible);
 
     return () => {
       if (sectionRef.current) mainObserver.unobserve(sectionRef.current);
       if (venturesRef.current) venturesObserver.unobserve(venturesRef.current);
       if (stakeholdersRef.current)
         stakeholdersObserver.unobserve(stakeholdersRef.current);
+      if (personnelRef.current)
+        personnelObserver.unobserve(personnelRef.current);
     };
   }, []);
 
@@ -82,6 +87,30 @@ const About = () => {
     },
   ];
 
+  // Key Personnel data - using the provided data
+  const keyPersonnel = [
+    {
+      name: "Prem Ranjan Kumar",
+      role: "Finance Head",
+      mobile: "+91 9771475402",
+    },
+    {
+      name: "Daksh Kumar",
+      role: "Administrator",
+      mobile: "+91 9123241275",
+    },
+    {
+      name: "Ved Prakash",
+      role: "Logistics",
+      mobile: "+91 9123241275",
+    },
+    {
+      name: "Kameshwar Singh",
+      role: "Logistics",
+      mobile: "+91 9771475402",
+    },
+  ];
+
   // Section title component
   const SectionTitle = ({ title }) => (
     <div className="text-center mb-12">
@@ -104,25 +133,6 @@ const About = () => {
           <SectionTitle title="About Veena Steel Traders" />
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            {/* <div
-              className={`transition-all duration-700 delay-300 ${
-                isVisible
-                  ? "opacity-100 animate-slide-in-left"
-                  : "opacity-0 -translate-x-10"
-              }`}>
-              <img
-                src={certificateImage}
-                alt="Steel manufacturing facility"
-                className="rounded-lg shadow-2xl w-full max-h object-cover transform hover:scale-[1.02] transition-transform duration-500"
-                style={{ boxShadow: "0 10px 30px -10px rgba(0,0,0,0.5)" }}
-              />
-            </div> */}
-            {/* <img
-              src={isoCertificateImage}
-              alt="Steel manufacturing facility"
-              className="rounded-lg shadow-2xl w-full max-h-130 object-contain transform hover:scale-[1.02] transition-transform duration-500"
-              style={{ boxShadow: "0 10px 30px -10px rgba(0,0,0,0.5)" }}
-            /> */}
             <div className="flex flex-col md:flex-row items-start md:items-center sm:items-center gap-6">
               {/* Certificate Image */}
               <div
@@ -248,11 +258,11 @@ const About = () => {
         {/* Stakeholders Section */}
         <div
           ref={stakeholdersRef}
-          className="mt-20 mb-12">
+          className="mt-20">
           <SectionTitle title="Our Leadership" />
 
           <div
-            className={`max-w-3xl mx-auto transition-all duration-700 ${
+            className={`max-w-5xl mx-auto transition-all duration-700 ${
               stakeholdersVisible
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-10"
@@ -279,6 +289,66 @@ const About = () => {
                       {person.role}
                     </p>
                     <p className="text-black">{person.description}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Key Personnel Section - using the same design as Leadership */}
+        <div
+          ref={personnelRef}
+          className="mt-20 mb-12">
+          <SectionTitle title="Key Personnel" />
+
+          <div
+            className={`max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 transition-all duration-700 ${
+              personnelVisible
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-10"
+            }`}>
+            {keyPersonnel.map((person, index) => (
+              <div
+                key={index}
+                className={`bg-blue-50 rounded-lg p-6 shadow-md border-l-4 border-blue-700 transition-all duration-500 hover:shadow-lg ${
+                  index % 2 === 0
+                    ? "transform hover:-translate-x-2"
+                    : "transform hover:translate-x-2"
+                }`}>
+                <div className="flex flex-col md:flex-row md:items-center">
+                  <div className="flex-shrink-0 mb-4 md:mb-0 md:mr-6">
+                    <div className="w-16 h-16 bg-blue-200 rounded-full flex items-center justify-center text-blue-800 font-bold text-xl border-2 border-blue-500">
+                      {person.name.charAt(0)}
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-blue-800">
+                      {person.name}
+                    </h3>
+                    <p className="text-blue-600 font-medium mb-2">
+                      {person.role}
+                    </p>
+                    <div className="flex items-center text-black">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-5 w-5 text-blue-700 mr-2"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                        />
+                      </svg>
+                      <a
+                        href={`tel:${person.mobile}`}
+                        className="text-blue-800 hover:text-blue-600">
+                        {person.mobile}
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
